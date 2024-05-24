@@ -1,0 +1,35 @@
+拉链表数据准备：
+
+1.  通过Sqoop将数据导入到Hive中        Mysql----> HIve
+sqoop improt \
+--connect jdbc:mysql://192.168.88.80:3306/demo \
+--username root \
+--password 123456 \
+--table t_product \
+--fielsd-terminated-by ',' \
+--hcatalog-database demo \
+--hcatalog-table ods_product \
+--m 1
+
+
+
+sqoop import \
+--connect jdbc:mysql://192.168.88.80:3306/userdb \
+--username root \
+--password 123456 \
+--table emp \
+--fields-terminated-by '\t' \
+--hcatalog-database test \
+--hcatalog-table emp_hive \
+-m 1
+
+
+sqoop improt "-Dorg.apache.sqoop.splitter.allow_text_splitter=true" \
+--connect jdbc:mysql://192.168.88.80:3306/demo \
+--username root \
+--password 123456 \
+--table t_product \
+--fielsd-terminated-by ',' \
+--hive-database demo \
+--hive-table demo.ods_product \
+--m 1
